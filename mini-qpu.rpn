@@ -1,0 +1,52 @@
+
+QINIT
+<< DUP 'QN' STO 2
+   SWAP ^ 1 →LIST (0,0)
+   CON 'QR' STO 1 'QR(1)' STO
+>>
+
+CNOT
+<<
+  [[ 0 1 ]
+   [ 1 0 ]]
+  3 ROLL 3 ROLL CU
+>>
+
+HAD
+<<
+  [[ 1 1 ]
+   [ 1 -1 ]]
+  2 √ / 0 3 ROLL CU
+>>
+
+PHAS
+<< 1 SWAP R→C P→R 1 0
+   0 4 ROLL ( 2 2 )
+   →ARRY 3 ROLL 3 ROLL
+>>
+
+CU
+<< → u c t
+  << 1 QN 2 SWAP ^
+     FOR x x 1 - R→B
+       c t + R→B AND
+       c t + R→B
+       IF == THEN
+         u x t - x Q2X2
+       END
+     NEXT
+  >>
+>>
+
+Q2X2
+<< → u a b
+  << 'QR' a GET 'QR'
+     b GET 2 →ARRY u SWAP
+     * ARRY→ DROP 'QR' b
+     1 →LIST 3 ROLL PUT
+     'QR' a 1 →LIST 3
+     ROLL PUT
+  >>
+>>
+
+
